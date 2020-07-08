@@ -1,8 +1,5 @@
 FROM ubuntu:latest
-# キャッシュとして使えるので分離
-RUN apt-get update 
-# -yはコンソールのインタラクティブ操作をyesにして自動処理
-RUN apt-get install -y \ 
+RUN apt-get update && apt-get install -y \ 
     curl \
+    cvs \
     nginx
-RUN apt-get install -y
