@@ -11,4 +11,9 @@ FROM ubuntu:latest
 # COPY something /new_dir/
 
 # 3.
-ADD compressed.tar /
+# ADD compressed.tar /
+
+# 4.
+RUN touch test
+ENTRYPOINT ["ls"]
+CMD ["--help"]
