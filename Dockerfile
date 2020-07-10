@@ -7,5 +7,8 @@ FROM ubuntu:latest
 # CMD ["/bin/bash"]
 
 # 2.
-RUN mkdir /new_dir
-COPY something /new_dir/
+# RUN mkdir /new_dir
+# COPY something /new_dir/
+
+# 3.
+ADD compressed.tar /
