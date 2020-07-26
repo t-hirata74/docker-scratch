@@ -10,6 +10,7 @@ sudo: required # 1
 services: docker # 2
 
 before_install: # 4
+  - cd product-register/
   - docker-compose up --build -d
 
 script: # 4,5
