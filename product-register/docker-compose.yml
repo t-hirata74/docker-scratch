@@ -1,7 +1,7 @@
 version: '3'
 
 volumes:
-  db-base:
+  db-data:
 
 # docker run -v ~/work/docker-scratch/product-register/:/product-register -p 3000:3000 -ti <image> bash を下記のように記述
 services:
