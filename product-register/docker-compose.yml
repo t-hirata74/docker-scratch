@@ -17,7 +17,7 @@ services:
     stdin_open: true # -iのこと
     depends_on: #dbができてからwebコンテナを作る
       - db
-    links:
+    links: #wenからdbにアクセルできるようになるらしい
       - db
 
   db:
