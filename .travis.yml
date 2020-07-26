@@ -9,6 +9,8 @@ sudo: required # 1
 
 services: docker # 2
 
+rvm: 2.5.8
+
 before_install: # 4
   - cd product-register/
   - docker-compose up --build -d
