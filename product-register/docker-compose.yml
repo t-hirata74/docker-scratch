@@ -1,0 +1,12 @@
+version: '3'
+
+# docker run -v ~/work/docker-scratch/product-register/:/product-register -p 3000:3000 -ti <image> bash を下記のように記述
+services:
+  web:
+    build: .
+    ports:
+      - '3000:3000'
+    volumes:
+      - '.:/product-register'
+    tty: true # -tのこと
+    stdin_open: true # -iのこと
