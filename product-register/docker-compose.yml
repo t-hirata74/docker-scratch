@@ -1,5 +1,8 @@
 version: '3'
 
+volumes:
+  data-base:
+
 # docker run -v ~/work/docker-scratch/product-register/:/product-register -p 3000:3000 -ti <image> bash を下記のように記述
 services:
   web:
@@ -8,5 +11,16 @@ services:
       - '3000:3000'
     volumes:
       - '.:/product-register'
+    environment:
+      - 'DATABASE_PASSWORD=postgres'
     tty: true # -tのこと
     stdin_open: true # -iのこと
+    depends_on: #dbができてからwebコンテナを作る
+      - db
+    links:
+      - db
+
+  db:
+    image: postgres
+    volumes:
+      - 'db-data:/var/lib/postgresql/data'
