@@ -10,5 +10,5 @@ COPY Gemfile Gemfile.lock /product-register/
 RUN bundle install
 
 # コンテナに全てのコードを入れる
-COPY . . 
+COPY product-register/. . 
 CMD ["rails", "s"]
