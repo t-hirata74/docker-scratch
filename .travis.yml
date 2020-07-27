@@ -15,21 +15,21 @@ services: docker # 2
 
 rvm: 2.5.8 # TravisCIのrubyバージョンを指定
 
-before_install: # 3
+before_install: # 3 # 6
   - cd product-register/
   - docker-compose up --build -d
-  - docker login -u "$HEROKU_USERNAME" -p "$HEROKU_API_KEY" registry.heroku.com # 6
+  - docker login -u "$HEROKU_USERNAME" -p "$HEROKU_API_KEY" registry.heroku.com 
 
 script: # 4,5
   - docker-compose exec --env 'RAILS_ENV=test' web rails db:create
   - docker-compose exec --env 'RAILS_ENV=test' web rails db:migrate
   - docker-compose exec --env 'RAILS_ENV=test' web rails test
 
-deploy:
+deploy: # 7 # 8 # 9
   provider: script
   script:
-    docker build -t registry.heroku.com/$HEROKU_APP_NAME/web -f Dockerfile.prod ; # 7
-    docker push registry.heroku.com/$HEROKU_APP_NAME/web # 8
-    heroku run --app $HEROKU_APP_NAME rails db:migrate; # 9
+    docker build -t registry.heroku.com/$HEROKU_APP_NAME/web -f Dockerfile.prod .
+    docker push registry.heroku.com/$HEROKU_APP_NAME/web 
+    heroku run --app $HEROKU_APP_NAME rails db:migrate; 
   on:
     branch: master # ※デプロイはmasterにmergeされたときだけ
