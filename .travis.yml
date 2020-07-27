@@ -4,6 +4,10 @@
 # 3.コンテナを起動
 # 4.DB準備
 # 5.テスト実行
+# 6.HerokuのDockerレジストリにログイン
+# 7.本番環境用のDockerfileをビルド(image作成)
+# 8.HerokuのDockerレジストリに本番環境用imageをpush
+# 9.アプリ起動
 
 sudo: required # 1
 
@@ -11,11 +15,21 @@ services: docker # 2
 
 rvm: 2.5.8 # TravisCIのrubyバージョンを指定
 
-before_install: # 4
+before_install: # 3
   - cd product-register/
   - docker-compose up --build -d
+  - docker login -u "$HEROKU_USERNAME" -p "$HEROKU_API_KEY" registry.hetoku.com # 6
 
 script: # 4,5
   - docker-compose exec --env 'RAILS_ENV=test' web rails db:create
   - docker-compose exec --env 'RAILS_ENV=test' web rails db:migrate
   - docker-compose exec --env 'RAILS_ENV=test' web rails test
+
+deploy:
+  provider: script
+  script:
+    docker build -t registry.heroku.com/$HEROKU_APP_NAME/web -f Dockerfile.prod ; # 7
+    docker push registry.heroku.com/$HEROKU_APP_NAME/web # 8
+    heroku run --app $HEROKU_APP_NAME rails db:migrate; # 9
+  on:
+    branch: master # ※デプロイはmasterにmergeされたときだけ
