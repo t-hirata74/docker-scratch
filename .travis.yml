@@ -33,7 +33,7 @@ deploy: # 7 # 8 # 9
     echo 'hoge2';
     docker push registry.heroku.com/$HEROKU_APP_NAME/web;
     echo 'hoge3';
-    heroku run --app $HEROKU_APP_NAME bundle exec rails db:migrate; 
+    heroku run --app $HEROKU_APP_NAME rails db:migrate; 
     echo 'hoge4';
   on:
     branch: master
