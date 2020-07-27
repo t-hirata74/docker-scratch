@@ -28,12 +28,12 @@ script: # 4,5
 deploy: # 7 # 8 # 9
   provider: script
   script:
-    echo 'hoge1'
-    docker build -t registry.heroku.com/$HEROKU_APP_NAME/web -f product-register/Dockerfile.prod .;
-    echo 'hoge2'
+    echo 'hoge1';
+    docker build -t registry.heroku.com/$HEROKU_APP_NAME/web -f Dockerfile.prod .;
+    echo 'hoge2';
     docker push registry.heroku.com/$HEROKU_APP_NAME/web;
-    echo 'hoge3'
+    echo 'hoge3';
     heroku run --app $HEROKU_APP_NAME rails db:migrate; 
-    echo 'hoge4'
+    echo 'hoge4';
   on:
     branch: master # ※デプロイはmasterにmergeされたときだけ
